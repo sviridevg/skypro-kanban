@@ -4,6 +4,25 @@
   box-sizing: border-box;
 }
 
+@keyframes myAnim {
+	0%,
+	50%,
+	100% {
+		opacity: 1;
+	}
+
+	25%,
+	75% {
+		opacity: 0;
+	}
+}
+
+.Loading {
+  text-align: center;
+  margin-top: 40px;
+  animation: myAnim 3s ease 0s 1 normal forwards;
+}
+
 *:before,
 *:after {
   box-sizing: border-box;
@@ -777,7 +796,7 @@ body {
   padding: 0;
 }
 .header__pop-user-set {
-  display: none;
+  display: block;
   position: absolute;
   top: 61px;
   right: 0;
