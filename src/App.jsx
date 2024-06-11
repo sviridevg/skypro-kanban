@@ -4,12 +4,12 @@ import { PopBrowse } from "./components/PopBrowse";
 import { Header } from "./components/Header";
 import { Main } from "./components/Main";
 import "./App.css";
-import { CardList } from "../data";
+import { cardList } from "../data";
 import { useEffect, useState } from "react";
 import { Loading } from "./components/Loading";
 
 function App() {
-  const [cards, setCards] = useState(CardList);
+  const [cards, setCards] = useState(cardList);
   const [isLoading, setIsloading] = useState(false);
 
   const addCard = () => {

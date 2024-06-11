@@ -1,6 +1,6 @@
 
 import Calendar from "../Icons/calendar";
-import { TopicColor } from "./topicColor";
+import { topicColor } from "./topicColor";
 
 // eslint-disable-next-line react/prop-types
 export const Card = ({ topic, title, date }) => {
@@ -9,7 +9,7 @@ export const Card = ({ topic, title, date }) => {
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
-          <div className={`card__theme ${TopicColor[topic]}`}>
+          <div className={`card__theme ${topicColor[topic]}`}>
             <p className="card__name">{topic}</p>
           </div>
           <a href="#popBrowse" target="_self">
