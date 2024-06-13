@@ -1,12 +1,17 @@
-import Calendar from "../Icons/calendar";
-import { CardCategory } from "./cardCategory";
 
-export const Card = ({ Category, TaskName, TaskCreationDate }) => {
+import Calendar from "../Icons/calendar";
+import { topicColor } from "./topicColor";
+
+// eslint-disable-next-line react/prop-types
+export const Card = ({ topic, title, date }) => {
+
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
-          <CardCategory Category={Category} />
+          <div className={`card__theme ${topicColor[topic]}`}>
+            <p className="card__name">{topic}</p>
+          </div>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
               <div></div>
@@ -17,11 +22,11 @@ export const Card = ({ Category, TaskName, TaskCreationDate }) => {
         </div>
         <div className="card__content">
           <a href="" target="_blank">
-            <h3 className="card__title"> {TaskName} </h3>
+            <h3 className="card__title"> {title} </h3>
           </a>
           <div className="card__date">
             <Calendar />
-            <p>{TaskCreationDate}</p>
+            <p>{date}</p>
           </div>
         </div>
       </div>

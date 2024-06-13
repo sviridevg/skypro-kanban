@@ -1,27 +1,24 @@
+/* eslint-disable react/prop-types */
 import { Card } from "../Card";
 
-export const Column = ({ title }) => {
+export const Column = ({ title, cardList }) => {
   return (
     <div className="main__column column">
       <div className="column__title">
         <p>{title}</p>
       </div>
+
       <div className="cards">
-        <Card
-          Category="Web Design"
-          TaskName="Название задачи"
-          TaskCreationDate="06.02.24"
-        />
-        <Card
-          Category="Research"
-          TaskName="Название задачи"
-          TaskCreationDate="06.02.24"
-        />
-        <Card
-          Category="Copywriting"
-          TaskName="Название задачи"
-          TaskCreationDate="06.02.24"
-        />
+        {cardList.map((card) => {
+          return (
+            <Card
+              key={card.id}
+              topic={card.topic}
+              title={card.title}
+              date={card.date}
+            />
+          );
+        })}
       </div>
     </div>
   );
