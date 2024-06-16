@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Hover01, Hover02 } from "../../globalStyle.stiled";
+import { Hover01, Hover02, Hover03 } from "../../globalStyle.stiled";
 
 export const Header = styled.div`
   width: 100%;
@@ -60,7 +60,7 @@ export const HeaderUser = styled.a`
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: #565eef;
+  color: ${({ theme }) => theme.HeaderUserName};
 
   ${Hover02};
 
@@ -70,8 +70,8 @@ export const HeaderUser = styled.a`
     width: 6px;
     height: 6px;
     border-radius: 1px;
-    border-left: 1.9px solid #565eef;
-    border-bottom: 1.9px solid #565eef;
+    border-left: 1.9px solid ${({ theme }) => theme.HeaderUserName};;
+    border-bottom: 1.9px solid ${({ theme }) => theme.HeaderUserName};;
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
     padding: 0;
@@ -87,15 +87,32 @@ export const HeaderPopUserSet = styled.div`
   height: 205px;
   border-radius: 10px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: #fff;
-  box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
+  background: ${({ theme }) => theme.popUserBg};
+  box-shadow: ${({ theme }) => theme.popUserShadow};
   padding: 34px;
   text-align: center;
   z-index: 2;
 `;
 
+export const PopUserSet = styled.div`
+  & button {
+    width: 72px;
+    height: 30px;
+    background: transparent;
+    color: ${({ theme }) => theme.popUserButtonColor};
+    border-radius: 4px;
+    border: 1px solid ${({ theme }) => theme.popUserButtonColor};;
+
+    ${Hover03};
+  }
+
+  & a {
+    color: ${({ theme }) => theme.popUserButtonColor};;
+  }
+`;
+
 export const PopUserSetName = styled.p`
-  color: #000;
+  color: ${({ theme }) => theme.popUserText};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
@@ -118,7 +135,7 @@ export const PopUserSetThem = styled.div`
   margin-bottom: 30px;
 
   & p {
-    color: #000;
+    color: ${({ theme }) => theme.popUserText};
     font-size: 14px;
     line-height: 21px;
     letter-spacing: -0.14px;

@@ -33,23 +33,25 @@ export const Header = ({ addCard, theme, setTheme }) => {
             </S.HeaderBtnMainNew>
             <S.HeaderUser onClick={toggleModalUser}>Ivan Ivanov</S.HeaderUser>
             {isOpen && (
-              <S.HeaderPopUserSet className="pop-user-set" id="user-set-target">
-                {/* <a href="">x</a>  */}
-                <S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
-                <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
-                <S.PopUserSetThem>
-                  <p>Темная тема</p>
-                  <input
-                    checked={theme === "dark"}
-                    onClick={onTheme}
-                    type="checkbox"
-                    name="checkbox"
-                  />
-                </S.PopUserSetThem>
-                <button type="button" className="_hover03">
-                  <a href="#popExit">Выйти</a>
-                </button>
-              </S.HeaderPopUserSet>
+              <S.PopUserSet>
+                <S.HeaderPopUserSet id="user-set-target">
+                  {/* <a href="">x</a>  */}
+                  <S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
+                  <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+                  <S.PopUserSetThem>
+                    <p>Темная тема</p>
+                    <input
+                      checked={theme === "dark"}
+                      onClick={onTheme}
+                      type="checkbox"
+                      name="checkbox"
+                    />
+                  </S.PopUserSetThem>
+                  <button type="button">
+                    <a href="#popExit">Выйти</a>
+                  </button>
+                </S.HeaderPopUserSet>
+              </S.PopUserSet>
             )}
           </S.HeaderNav>
         </S.HeaderBlock>

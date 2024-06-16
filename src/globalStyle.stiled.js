@@ -61,7 +61,7 @@ export const Hover01 = css`
 
 export const Hover02 = css`
   &:hover {
-    color: #33399b;
+    color: ${({ theme }) => theme.popUserButtonColor};
   }
 
   &::after {
@@ -72,7 +72,12 @@ export const Hover02 = css`
 
 export const Hover03 = css`
   &:hover {
-    background-color: #33399b;
+    background-color: #565eef;
+    color: #ffffff;
+    border: 1px solid #565eef;
+  }
+
+  &:hover a {
     color: #ffffff;
   }
 `;

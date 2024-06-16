@@ -1,6 +1,15 @@
 export const light = {
   // Хедер
   headerBg: "#FFFFFF",
+  HeaderUserName: "#565eef",
+  HeaderUserNameHover: "#33399b",
+
+
+  // Хедер поп-пользователя
+  popUserBg: "#FFF",
+  popUserShadow: "0px 10px 39px 0px rgba(26, 56, 101, 0.21)",
+  popUserText: "#000",
+  popUserButtonColor: "#565eef",
 
   // Тело страницы
   body: "#EAEEF6",
@@ -26,6 +35,15 @@ export const light = {
 export const dark = {
   // Хедер
   headerBg: "#20202C",
+  HeaderUserName: "#FFFFFF",
+  HeaderUserNameHover: "#FFFFFF",
+
+
+  // Хедер поп-пользователя
+  popUserBg: "#202229",
+  popUserShadow: "0px 10px 39px 0px #94A6BE66",
+  popUserText: "#FFFFFF",
+  popUserButtonColor: "#FFFFFF",
 
   // Тело страницы
   body: "#151419",
