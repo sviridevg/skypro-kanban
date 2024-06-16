@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import { statusList } from "../../../data.js";
+import { Container } from "../../globalStyle.stiled.js";
 import { Column } from "../Column/index.jsx";
+import * as S from "./main.styled.js";
 
 export const Main = ({ cards }) => {
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
+    <S.Main>
+      <Container>
+        <S.MainBlock>
+          <S.MainContent>
             {statusList.map((status) => (
               <Column
                 key={status}
@@ -15,9 +17,9 @@ export const Main = ({ cards }) => {
                 cardList={cards.filter((card) => card.status === status)}
               />
             ))}
-          </div>
-        </div>
-      </div>
-    </main>
+          </S.MainContent>
+        </S.MainBlock>
+      </Container>
+    </S.Main>
   );
 };
