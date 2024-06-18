@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 import { Card } from "../Card";
+import { Cards, ColumnTitle, MainColumn } from "./column.styled";
 
 export const Column = ({ title, cardList }) => {
   return (
-    <div className="main__column column">
-      <div className="column__title">
+    <MainColumn className="column">
+      <ColumnTitle>
         <p>{title}</p>
-      </div>
+      </ColumnTitle>
 
-      <div className="cards">
+      <Cards>
         {cardList.map((card) => {
           return (
             <Card
@@ -19,7 +20,7 @@ export const Column = ({ title, cardList }) => {
             />
           );
         })}
-      </div>
-    </div>
+      </Cards>
+    </MainColumn>
   );
 };

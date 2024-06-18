@@ -1,7 +1,10 @@
+import { ColumnTitle } from "../Column/column.styled";
+import * as S from "../Loading/loading.styled.js";
+
 export const Loading = () => {
   return (
-    <div className="column__title ">
-      <p className="Loading">Данные загружаются ... </p>
-    </div>
+    <ColumnTitle>
+      <S.Loading>Данные загружаются ... </S.Loading>
+    </ColumnTitle>
   );
 };
