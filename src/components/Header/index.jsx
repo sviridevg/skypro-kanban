@@ -1,6 +1,8 @@
 import { useState } from "react";
 import * as S from "./header.styled.js";
 import { Container } from "../../globalStyle.stiled.js";
+import { Link } from "react-router-dom";
+
 
 // eslint-disable-next-line react/prop-types
 export const Header = ({ addCard, theme, setTheme }) => {
@@ -8,6 +10,8 @@ export const Header = ({ addCard, theme, setTheme }) => {
   const toggleModalUser = () => {
     setIsOpen(!isOpen);
   };
+
+
 
   const onTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -48,7 +52,7 @@ export const Header = ({ addCard, theme, setTheme }) => {
                     />
                   </S.PopUserSetThem>
                   <button type="button">
-                    <a href="#popExit">Выйти</a>
+                    <Link to={"/exit"} href="#popExit">Выйти</Link>
                   </button>
                 </S.HeaderPopUserSet>
               </S.PopUserSet>
