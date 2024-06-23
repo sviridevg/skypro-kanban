@@ -15,10 +15,16 @@ export const light = {
   PopExitTtlH2: "#000000",
   PopExitButtonNo: "#565eef",
 
-
   // Тело страницы
   body: "#EAEEF6",
   LoadingBG: "#eaeef6",
+
+  //Логин
+  ModalBGColor: "#EAEEF6",
+  Modal: "#FFFFFF",
+  ModalBorder: "#D4DBE5",
+  ModalTtl: "#000000",
+  ModalInputBorder: "rgba(148, 166, 190, 0.4)",
 
   // Карточка
   cardsBg: "#FFFFFF",
@@ -44,7 +50,6 @@ export const dark = {
   HeaderUserName: "#FFFFFF",
   HeaderUserNameHover: "#FFFFFF",
 
-
   // Хедер поп-пользователя
   popUserBg: "#202229",
   popUserShadow: "0px 10px 39px 0px #94A6BE66",
@@ -59,6 +64,14 @@ export const dark = {
   // Тело страницы
   body: "#151419",
   LoadingBG: "#151419",
+
+  //Логин
+  ModalBGColor: "#151419",
+  Modal: "#20202C",
+  ModalBorder: "#4E5566",
+  ModalTtl: "#ffffff",
+  ModalInputBorder: "rgba(148, 166, 190, 0.4)",
+  ModalInputBgColor: "#20202C",
 
   // Карточка
   cardsBg: "#20202C",

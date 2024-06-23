@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../router/routes";
+import * as S from "./Login.styled";
 
 // eslint-disable-next-line react/prop-types
 export const LoginPage = ({ setIsAuth }) => {
@@ -8,46 +9,44 @@ export const LoginPage = ({ setIsAuth }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsAuth(true);
-    navigation(routes.main)
+    navigation(routes.main);
   };
 
   return (
-    <div className="wrapper">
-      <div className="container-signin">
-        <div className="modal">
-          <div className="modal__block">
-            <div className="modal__ttl">
+    <S.LoginWrapper>
+      <S.ContainerSignin>
+        <S.Modal>
+          <S.ModalBlok>
+            <S.ModalTtl>
               <h2>Вход</h2>
-            </div>
-            <form className="modal__form-login" id="formLogIn" action="#">
-              <input
-                className="modal__input"
+            </S.ModalTtl>
+            <S.ModalFormLogin id="formLogIn" action="#">
+              <S.ModalInput
                 type="text"
                 name="login"
                 id="formlogin"
                 placeholder="Эл. почта"
               />
-              <input
-                className="modal__input"
+              <S.ModalInput
                 type="password"
                 name="password"
                 id="formpassword"
                 placeholder="Пароль"
               />
-              <button
+              <S.ModalBtnEnter
                 onClick={handleSubmit}
                 className="modal__btn-enter _hover01"
                 id="btnEnter">
                 Войти
-              </button>
-              <div className="modal__form-group">
+              </S.ModalBtnEnter>
+              <S.ModalFormGroup>
                 <p>Нужно зарегистрироваться?</p>
                 <Link to={routes.register}>Регистрируйтесь здесь</Link>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+              </S.ModalFormGroup>
+            </S.ModalFormLogin>
+          </S.ModalBlok>
+        </S.Modal>
+      </S.ContainerSignin>
+    </S.LoginWrapper>
   );
 };
