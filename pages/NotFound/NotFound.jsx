@@ -7,7 +7,7 @@ export const NotFound = () => {
     <NouFound>
       <h2>Ой... Страница не найдена. Давайте попробуем...</h2>
       <button type="button">
-        <Link to={routes.main}>Вернуться на глвную</Link>
+        <Link to={routes.main}>Вернуться на главную</Link>
       </button>
 
       <img src="./public/404.svg" alt="Страница не найдена" />
