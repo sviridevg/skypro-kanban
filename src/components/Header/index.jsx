@@ -42,7 +42,7 @@ export const Header = ({ addCard, theme, setTheme }) => {
                   <S.PopUserSetThem>
                     <p>Темная тема</p>
                     <input
-                      checked={theme === "dark"}
+                      defaultChecked={theme === "dark"}
                       onClick={onTheme}
                       type="checkbox"
                       name="checkbox"

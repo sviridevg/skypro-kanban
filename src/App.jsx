@@ -5,7 +5,8 @@ import { useState } from "react";
 import { GlobalStyle } from "./globalStyle.stiled";
 import { ThemeProvider } from "styled-components";
 import { dark, light } from "./Theme";
-import { AppRoutes } from "../router/AppRoutes.jsx";
+import { AppRoutes } from "./router/AppRoutes";
+
 
 function App() {
   const [theme, setTheme] = useState("light");

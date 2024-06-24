@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { PopNewCard } from "../../src/components/PopNewCard";
-import { Header } from "../../src/components/Header";
-import { Main } from "../../src/components/Main";
-import { Loading } from "../../src/components/Loading";
-import { cardList } from "../../data";
-import { Wrapper } from "../../src/globalStyle.stiled";
+import { PopNewCard } from "../../components/PopNewCard"
+import { Header } from "../../components/Header";
+import { Main } from "../../components/Main";
+import { Loading } from "../../components/Loading";
+import { cardList } from "../../../data";
+import { Wrapper } from "../../globalStyle.stiled";
 import { Outlet } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
@@ -34,7 +34,12 @@ export const MainPage = ({ theme, setTheme, setIsAuth }) => {
     <Wrapper>
       <Outlet />
       <PopNewCard />
-      <Header setIsAuth={setIsAuth} addCard={addCard} setTheme={setTheme} theme={theme} />
+      <Header
+        setIsAuth={setIsAuth}
+        addCard={addCard}
+        setTheme={setTheme}
+        theme={theme}
+      />
       {isLoading ? <Loading /> : <Main cards={cards} />}
     </Wrapper>
   );

@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Hover01 } from "../../src/globalStyle.stiled";
+import { Hover01 } from "../../globalStyle.stiled";
+
 
 export const NouFound = styled.div`
   display: flex;

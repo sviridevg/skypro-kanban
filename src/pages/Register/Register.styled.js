@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
-import { Hover01 } from "../../src/globalStyle.stiled";
+import { Hover01 } from "../../globalStyle.stiled";
+
 
 export const RegisterWrapper = styled.div`
   width: 100%;
