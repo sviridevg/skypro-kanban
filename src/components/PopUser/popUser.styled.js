@@ -48,7 +48,7 @@ export const PopExitTtl = styled.div`
   }
 `;
 
-export const PopExitForm = styled.form``;
+export const PopExitForm = styled.div``;
 export const PopExitFormGroup = styled(PopExitForm)`
   width: 100%;
   display: flex;
