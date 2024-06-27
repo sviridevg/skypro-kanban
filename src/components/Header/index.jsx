@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as S from "./header.styled.js";
 import { Container } from "../../globalStyle.stiled.js";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export const Header = ({ addCard, theme, setTheme }) => {
@@ -41,14 +42,14 @@ export const Header = ({ addCard, theme, setTheme }) => {
                   <S.PopUserSetThem>
                     <p>Темная тема</p>
                     <input
-                      checked={theme === "dark"}
+                      defaultChecked={theme === "dark"}
                       onClick={onTheme}
                       type="checkbox"
                       name="checkbox"
                     />
                   </S.PopUserSetThem>
                   <button type="button">
-                    <a href="#popExit">Выйти</a>
+                    <Link to={"/exit"}>Выйти</Link>
                   </button>
                 </S.HeaderPopUserSet>
               </S.PopUserSet>

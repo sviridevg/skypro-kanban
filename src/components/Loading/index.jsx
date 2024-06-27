@@ -3,8 +3,10 @@ import * as S from "../Loading/loading.styled.js";
 
 export const Loading = () => {
   return (
-    <ColumnTitle>
-      <S.Loading>Данные загружаются ... </S.Loading>
-    </ColumnTitle>
+    <S.LoadingBG>
+      <ColumnTitle>
+        <S.Loading>Данные загружаются ... </S.Loading>
+      </ColumnTitle>
+    </S.LoadingBG>
   );
 };

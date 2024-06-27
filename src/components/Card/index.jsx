@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import Calendar from "../Icons/calendar";
 import * as S from "./card.styled";
 
 // eslint-disable-next-line react/prop-types
-export const Card = ({ topic, title, date }) => {
+export const Card = ({ topic, title, date, id }) => {
   return (
     <S.CardsItem>
       <S.CardsCard>
@@ -10,13 +11,13 @@ export const Card = ({ topic, title, date }) => {
           <S.CardTheme $topicColor = {topic}>
             <p>{topic}</p>
           </S.CardTheme>
-          <a href="#popBrowse" target="_self">
+          <Link to={`/card/${id}`} target="_self">
             <S.CardsBtn>
               <div></div>
               <div></div>
               <div></div>
             </S.CardsBtn>
-          </a>
+          </Link>
         </S.CardsGroup>
         <S.CardContent>
           <a href="" target="_blank">

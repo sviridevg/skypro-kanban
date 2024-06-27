@@ -12,9 +12,13 @@ const LoadingAnimation = keyframes`
 		opacity: 0;
 	}
 `;
-
+export const LoadingBG = styled.div`
+  background-color:${({ theme }) => theme.LoadingBG};
+  margin: -15px 0;
+`;
 export const Loading = styled.p`
+  height: 100vh;
   text-align: center;
-  margin-top: 40px;
+  padding-top: 40px;
   animation: ${LoadingAnimation} 3s ease 0s 1 normal forwards;
 `;
