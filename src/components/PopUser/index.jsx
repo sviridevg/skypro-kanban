@@ -4,11 +4,11 @@ import * as S from "./popUser.styled";
 import { routes } from "../../router/routes";
 
 // eslint-disable-next-line react/prop-types
-export const PopUser = ({ setIsAuth }) => {
+export const PopUser = ({ setUser }) => {
   const navigation = useNavigate();
 
   const logOut = () => {
-    setIsAuth(false);
+    setUser(null);
     navigation(routes.login);
   };
 

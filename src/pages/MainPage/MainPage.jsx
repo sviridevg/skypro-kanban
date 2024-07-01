@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { PopNewCard } from "../../components/PopNewCard"
+import { PopNewCard } from "../../components/PopNewCard";
 import { Header } from "../../components/Header";
 import { Main } from "../../components/Main";
 import { Loading } from "../../components/Loading";
-import { cardList } from "../../../data";
+// import { cardList } from "../../../data";
 import { Wrapper } from "../../globalStyle.stiled";
 import { Outlet } from "react-router-dom";
+import { fetchTasks } from "../../api/tasks";
 
 // eslint-disable-next-line react/prop-types
-export const MainPage = ({ theme, setTheme, setIsAuth }) => {
-  const [cards, setCards] = useState(cardList);
-  const [isLoading, setIsloading] = useState(false);
+export const MainPage = ({ theme, setTheme, user, setUser }) => {
+  // const [cards, setCards] = useState(cardList);
+  const [cards, setCards] = useState([]);
+  const [isLoading, setIsloading] = useState(true);
+  const [error, setError] = useState("");
 
   const addCard = () => {
     const newCard = {
@@ -24,10 +27,17 @@ export const MainPage = ({ theme, setTheme, setIsAuth }) => {
   };
 
   useEffect(() => {
-    setIsloading(true);
-    setTimeout(() => {
-      setIsloading(false);
-    }, 2000);
+    // eslint-disable-next-line react/prop-types
+    fetchTasks(user.token)
+      .then((tasks) => {
+        setCards(tasks.tasks);
+        setIsloading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setIsloading(true);
+        console.error("Не удалось загрузить данные с сервера:", error);
+      });
   }, []);
 
   return (
@@ -35,12 +45,17 @@ export const MainPage = ({ theme, setTheme, setIsAuth }) => {
       <Outlet />
       <PopNewCard />
       <Header
-        setIsAuth={setIsAuth}
+        user={user}
+        setUser={setUser}
         addCard={addCard}
         setTheme={setTheme}
         theme={theme}
       />
-      {isLoading ? <Loading /> : <Main cards={cards} />}
+      {isLoading ? (
+        <Loading setError={setError} error={error} />
+      ) : (
+        <Main cards={cards} />
+      )}
     </Wrapper>
   );
 };
