@@ -13,8 +13,8 @@ export const Column = ({ title, cardList }) => {
         {cardList.map((card) => {
           return (
             <Card
-              key={card.id}
-              id={card.id}
+              key={card._id}
+              id={card._id}
               topic={card.topic}
               title={card.title}
               date={card.date}

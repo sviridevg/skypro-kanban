@@ -1,8 +1,43 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../router/routes";
 import * as S from "./Register.styled";
+import { useState } from "react";
+import { getUsers, signUp } from "../../api/register";
 
 export const RegisterPage = () => {
+  const navigation = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    login: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.login || !formData.password) {
+      setError(
+        "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме"
+      );
+      return;
+    }
+
+    getUsers({ formData }).finally(() => {
+      signUp(formData)
+        .then((res) => {
+          alert(
+            `${res.user.name} регистрация прошла успешно, войдите для продолжения работы`
+          );
+          navigation(routes.login);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    });
+  };
+
   return (
     <S.RegisterWrapper>
       <S.ContainerSignin>
@@ -11,30 +46,42 @@ export const RegisterPage = () => {
             <S.ModalTtl>
               <h2>Регистрация</h2>
             </S.ModalTtl>
-            <S.ModalFormLogin id="formLogUp" action="#">
+            <S.ModalFormLogin onSubmit={handleSignUp} id="formLogUp" action="#">
               <S.ModalInput
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="first-name"
                 type="text"
                 name="first-name"
                 id="first-name"
                 placeholder="Имя"
               />
+
               <S.ModalInput
+                onChange={(e) =>
+                  setFormData({ ...formData, login: e.target.value })
+                }
                 className="login"
                 type="text"
                 name="login"
                 id="loginReg"
-                placeholder="Эл. почта"
+                placeholder="Логин"
               />
               <S.ModalInput
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
                 className="password-first"
                 type="password"
                 name="password"
                 id="passwordFirst"
                 placeholder="Пароль"
               />
-              <S.ModalBtnEnter id="SignUpEnter">
-                <Link to={routes.main}>Зарегистрироваться</Link>
+
+              {error && <p>{error}</p>}
+              <S.ModalBtnEnter onClick={handleSignUp} id="SignUpEnter">
+                Зарегистрироваться
               </S.ModalBtnEnter>
               <S.ModalFormGroup>
                 <p>

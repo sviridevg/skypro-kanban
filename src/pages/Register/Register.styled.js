@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import { Hover01 } from "../../globalStyle.stiled";
 
-
 export const RegisterWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -90,11 +89,20 @@ export const ModalInput = styled.input`
     letter-spacing: -0.28px;
     color: #94a6be;
   }
+
 `;
 
-export const FirstName = css``;
-export const Login = css``;
-export const PasswordFirst = css``;
+export const FirstName = css`
+  border-color: red;
+`;
+
+export const Login = css`
+  border-color: red;
+`;
+
+export const PasswordFirst = css`
+  border-color: red;
+`;
 
 export const ModalBtnEnter = styled.button`
   width: 100%;

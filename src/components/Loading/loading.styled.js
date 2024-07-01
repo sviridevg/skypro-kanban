@@ -20,5 +20,5 @@ export const Loading = styled.p`
   height: 100vh;
   text-align: center;
   padding-top: 40px;
-  animation: ${LoadingAnimation} 3s ease 0s 1 normal forwards;
+  animation: ${LoadingAnimation} 3s ease 0s 10 normal forwards;
 `;
