@@ -9,27 +9,33 @@ import { CardViewing } from "../pages/СardViewing/СardViewing";
 import { routes } from "./routes";
 import { PrivateRoute } from "./PrivateRoute";
 
-
 // eslint-disable-next-line react/prop-types
 export const AppRoutes = ({ theme, setTheme }) => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState(null);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PrivateRoute isAuth={isAuth} />}>
+        <Route element={<PrivateRoute user={user} />}>
           <Route
             path={routes.main}
-            element={<MainPage setIsAuth={setIsAuth} theme={theme} setTheme={setTheme} />}>
-            <Route path={routes.exit} element={<ExitPage setIsAuth={setIsAuth} />} />
+            element={
+              <MainPage
+                user={user}
+                setUser={setUser}
+                theme={theme}
+                setTheme={setTheme}
+              />
+            }>
+            <Route
+              path={routes.exit}
+              element={<ExitPage setUser={setUser} />}
+            />
             <Route path={routes.card} element={<CardViewing />} />
           </Route>
         </Route>
         <Route path={routes.notFound} element={<NotFound />} />
-        <Route
-          path={routes.login}
-          element={<LoginPage setIsAuth={setIsAuth} />}
-        />
+        <Route path={routes.login} element={<LoginPage setUser={setUser} />} />
         <Route path={routes.register} element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>

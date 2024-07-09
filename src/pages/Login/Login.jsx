@@ -1,15 +1,36 @@
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../router/routes";
 import * as S from "./Login.styled";
+import { useState } from "react";
+import { signIn } from "../../api/user";
 
 // eslint-disable-next-line react/prop-types
-export const LoginPage = ({ setIsAuth }) => {
+export const LoginPage = ({ setUser }) => {
   const navigation = useNavigate();
+
+  const [formData, setFormData] = useState({ login: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsAuth(true);
-    navigation(routes.main);
+
+    if (!formData.login) {
+      setError("Введите логин");
+      return;
+    }
+    if (!formData.password) {
+      setError("Введите пароль");
+      return;
+    }
+
+    signIn(formData)
+      .then((res) => {
+        setUser(res.user);
+        navigation(routes.main);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -20,19 +41,26 @@ export const LoginPage = ({ setIsAuth }) => {
             <S.ModalTtl>
               <h2>Вход</h2>
             </S.ModalTtl>
-            <S.ModalFormLogin id="formLogIn" action="#">
+            <S.ModalFormLogin onSubmit={handleSubmit} id="formLogIn" action="#">
               <S.ModalInput
+                onChange={(e) =>
+                  setFormData({ ...formData, login: e.target.value })
+                }
                 type="text"
                 name="login"
                 id="formlogin"
-                placeholder="Эл. почта"
+                placeholder="Логин"
               />
               <S.ModalInput
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
                 type="password"
                 name="password"
                 id="formpassword"
                 placeholder="Пароль"
               />
+              {error && <p>{error}</p>}
               <S.ModalBtnEnter
                 onClick={handleSubmit}
                 className="modal__btn-enter _hover01"
