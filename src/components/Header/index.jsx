@@ -4,10 +4,12 @@ import * as S from "./header.styled.js";
 import { Container } from "../../globalStyle.stiled.js";
 import { Link } from "react-router-dom";
 import { routes } from "../../router/routes.js";
+import { useUserContext } from "../Context/useUserContext.js";
 
 // eslint-disable-next-line react/prop-types
-export const Header = ({ addCard, theme, setTheme, user }) => {
+export const Header = ({ theme, setTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUserContext();
   const toggleModalUser = () => {
     setIsOpen(!isOpen);
   };
@@ -31,9 +33,12 @@ export const Header = ({ addCard, theme, setTheme, user }) => {
             </Link>
           </S.HeaderLogo>
           <S.HeaderNav>
-            <S.HeaderBtnMainNew onClick={addCard} id="btnMainNew">
-              <a>Создать новую задачу</a>
-            </S.HeaderBtnMainNew>
+            <Link to={routes.newCard} target="_self">
+              <S.HeaderBtnMainNew id="btnMainNew">
+                Создать новую задачу
+              </S.HeaderBtnMainNew>
+            </Link>
+
             <S.HeaderUser onClick={toggleModalUser}>{user.name}</S.HeaderUser>
             {isOpen && (
               <S.PopUserSet>

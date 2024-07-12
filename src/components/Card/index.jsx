@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Calendar from "../Icons/calendar";
 import * as S from "./card.styled";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
 
 // eslint-disable-next-line react/prop-types
 export const Card = ({ topic, title, date, id }) => {
@@ -8,7 +10,7 @@ export const Card = ({ topic, title, date, id }) => {
     <S.CardsItem>
       <S.CardsCard>
         <S.CardsGroup>
-          <S.CardTheme $topicColor = {topic}>
+          <S.CardTheme $topicColor={topic}>
             <p>{topic}</p>
           </S.CardTheme>
           <Link to={`/card/${id}`} target="_self">
@@ -25,7 +27,7 @@ export const Card = ({ topic, title, date, id }) => {
           </a>
           <S.CardDate>
             <Calendar />
-            <p>{date}</p>
+            <p>{format(date, "dd.MM.yy", { locale: ru })}</p>
           </S.CardDate>
         </S.CardContent>
       </S.CardsCard>

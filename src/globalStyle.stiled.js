@@ -82,6 +82,17 @@ export const Hover03 = css`
   }
 `;
 
+export const Categories = css`
+  margin-bottom: 20px;
+`;
+
+export const Subttl = css`
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`;
+
 export const Orange = css`
   background-color: ${({ theme }) => theme.orangeBg};
   color: ${({ theme }) => theme.orangeColor};

@@ -3,11 +3,13 @@ import { routes } from "../../router/routes";
 import * as S from "./Login.styled";
 import { useState } from "react";
 import { signIn } from "../../api/user";
+import { useUserContext } from "../../components/Context/useUserContext";
 
 // eslint-disable-next-line react/prop-types
-export const LoginPage = ({ setUser }) => {
+export const LoginPage = () => {
   const navigation = useNavigate();
 
+  const { login } = useUserContext();
   const [formData, setFormData] = useState({ login: "", password: "" });
   const [error, setError] = useState("");
 
@@ -25,7 +27,7 @@ export const LoginPage = ({ setUser }) => {
 
     signIn(formData)
       .then((res) => {
-        setUser(res.user);
+        login(res.user);
         navigation(routes.main);
       })
       .catch((error) => {
