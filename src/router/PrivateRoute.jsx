@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { routes } from "./routes";
-import { useUserContext } from "../components/Context/useUserContext";
 
-// eslint-disable-next-line react/prop-types
+import { useUser } from "../context/User/useUser";
+
 export const PrivateRoute = () => {
-  const { user } = useUserContext();
+  const { user } = useUser();
   return user ? <Outlet /> : <Navigate to={routes.login} />;
 };

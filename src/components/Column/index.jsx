@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+
 import { Card } from "../Card";
 import { Cards, ColumnTitle, MainColumn } from "./column.styled";
 

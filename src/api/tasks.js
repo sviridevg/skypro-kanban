@@ -1,9 +1,9 @@
 export const apiUrl = "https://wedev-api.sky.pro/api/kanban";
 
 export const fetchTasks = async (token) => {
-  if (!token) {
-    throw new Error("Необходимо авторизоваться!");
-  }
+  if (!token) throw new Error("Необходимо авторизоваться!");
+
+  // Запрос к API получения списка карточек
   const response = await fetch(apiUrl, {
     method: "GET",
     headers: {

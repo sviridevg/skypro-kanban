@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import * as S from "./popUser.styled";
 import { routes } from "../../router/routes";
-import { useUserContext } from "../Context/useUserContext";
 
-// eslint-disable-next-line react/prop-types
+import { useUser } from "../../context/User/useUser";
+
+
 export const PopUser = () => {
-  const { logOut } = useUserContext();
+  const { logOut } = useUser();
 
   return (
     <S.PopExit id="popExit">

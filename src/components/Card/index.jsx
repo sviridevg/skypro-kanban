@@ -4,7 +4,6 @@ import * as S from "./card.styled";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 
-// eslint-disable-next-line react/prop-types
 export const Card = ({ topic, title, date, id }) => {
   return (
     <S.CardsItem>

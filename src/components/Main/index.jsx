@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+
 import { statusList } from "../../../data.js";
 import { Container } from "../../globalStyle.stiled.js";
 import { Column } from "../Column/index.jsx";

@@ -1,15 +1,14 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import * as S from "./header.styled.js";
 import { Container } from "../../globalStyle.stiled.js";
 import { Link } from "react-router-dom";
 import { routes } from "../../router/routes.js";
-import { useUserContext } from "../Context/useUserContext.js";
 
-// eslint-disable-next-line react/prop-types
+import { useUser } from "../../context/User/useUser.js";
+
 export const Header = ({ theme, setTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useUserContext();
+  const { user } = useUser();
   const toggleModalUser = () => {
     setIsOpen(!isOpen);
   };

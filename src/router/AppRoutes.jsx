@@ -8,17 +8,16 @@ import { ExitPage } from "../pages/ExitPage/ExitPage";
 import { CardViewing } from "../pages/СardViewing/СardViewing";
 import { routes } from "./routes";
 import { PrivateRoute } from "./PrivateRoute";
-import { UserProvider } from "../components/Context/UserContext";
+import { UserProvider } from "../context/User/UserContext";
 import { NewCard } from "../pages/NewCard/NewCard";
-import { TasksProvider } from "../components/Context/Tasks/TasksContext";
+import { TasksProvider } from "../context/Tasks/TasksContext";
 
-// eslint-disable-next-line react/prop-types
 export const AppRoutes = ({ theme, setTheme }) => {
   const [user, setUser] = useState(null);
 
   return (
-    <TasksProvider>
-      <UserProvider>
+    <UserProvider>
+      <TasksProvider>
         <BrowserRouter>
           <Routes>
             <Route element={<PrivateRoute />}>
@@ -48,7 +47,7 @@ export const AppRoutes = ({ theme, setTheme }) => {
             <Route path={routes.register} element={<RegisterPage />} />
           </Routes>
         </BrowserRouter>
-      </UserProvider>
-    </TasksProvider>
+      </TasksProvider>
+    </UserProvider>
   );
 };
