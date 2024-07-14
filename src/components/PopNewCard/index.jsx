@@ -1,14 +1,54 @@
 import { Link } from "react-router-dom";
-import { Calendar } from "../Calendar";
-import { routes } from "../../router/routes";
 
+import * as C from "../Calendar/calendar.styled";
+import "react-day-picker/dist/style.css";
+import { format, formatISO } from "date-fns";
+import { ru } from "date-fns/locale";
+
+import { routes } from "../../router/routes";
 import * as S from "./popNewCard.styled";
+import { useEffect, useState } from "react";
+import { addTask } from "../../api/newCard";
 
 export const PopNewCard = () => {
+  const [selected, setSelected] = useState();
+  const [carsdData, setCardData] = useState({
+    title: "",
+    topic: "",
+    status: "",
+    description: "",
+    date: "",
+  });
+
+  // console.log(carsdData);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCardData({
+      title: "",
+      topic: "",
+      status: "",
+      description: "",
+      date: "",
+    });
+  };
+
+  useEffect(() => {
+    if (selected) {
+      let result = formatISO(selected, "dd.MM.yy", { locale: ru });
+      setCardData({ ...carsdData, date: `${result}` });
+    }
+  }, [selected]);
+
+  const handleNewCard = (e) => {
+    e.preventDefault();
+    addTask(carsdData);
+  };
+
   return (
     <S.PopNewCard id="popNewCard">
       <S.PopNewCardContainer>
-        <S.PopNewCardBlock>
+        <S.PopNewCardBlock onSubmit={handleSubmit}>
           <S.PopNewCardContent>
             <h3>Создание задачи</h3>
             <Link to={routes.main}>
@@ -25,6 +65,9 @@ export const PopNewCard = () => {
                     name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, title: e.target.value })
+                    }
                     autoFocus
                   />
                 </S.FormNewBlock>
@@ -35,16 +78,55 @@ export const PopNewCard = () => {
                   <textarea
                     name="text"
                     id="textArea"
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, description: e.target.value })
+                    }
                     placeholder="Введите описание задачи..."></textarea>
                 </S.FormNewBlock>
               </S.PopNewCardForm>
-              <Calendar />
+
+              <C.PopNewCardCalendar>
+                <C.CalendarTtl>Даты</C.CalendarTtl>
+                <C.CalendarBlock>
+                  <C.CalendarContent>
+                    <C.StyledDatePicker
+                      mode="single"
+                      selected={selected}
+                      onSelect={setSelected}
+                      locale={ru}
+                    />
+                  </C.CalendarContent>
+                  <C.CalendarPeriod>
+                    {!selected && (
+                      <C.CalendarPDateEnd>
+                        {" "}
+                        Выберите срок исполнения.{" "}
+                      </C.CalendarPDateEnd>
+                    )}
+                    {selected && (
+                      <C.CalendarPDateEnd>
+                        Срок исполнения:
+                        <span>
+                          {format(selected, "dd.MM.yy", { locale: ru })}{" "}
+                        </span>
+                      </C.CalendarPDateEnd>
+                    )}
+                  </C.CalendarPeriod>
+                </C.CalendarBlock>
+              </C.PopNewCardCalendar>
             </S.PopNewCardWrap>
             <S.PopNewCardCategories>
               <S.PopNewCardP>Категория</S.PopNewCardP>
               <S.CategoriesThemes>
                 <S.Checkbox>
-                  <input type="radio" name="radio" />
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="Web Design"
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, topic: e.target.id })
+                    }
+                  />
                   <span>
                     <S.Categori $categori={"Web Design"}>
                       <p>Web Design</p>
@@ -52,7 +134,14 @@ export const PopNewCard = () => {
                   </span>
                 </S.Checkbox>
                 <S.Checkbox>
-                  <input type="radio" name="radio" />
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="Research"
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, topic: e.target.id })
+                    }
+                  />
                   <span>
                     <S.Categori $categori={"Research"}>
                       <p>Research</p>
@@ -60,7 +149,14 @@ export const PopNewCard = () => {
                   </span>
                 </S.Checkbox>
                 <S.Checkbox>
-                  <input type="radio" name="radio" />
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="Copywriting"
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, topic: e.target.id })
+                    }
+                  />
                   <span>
                     <S.Categori $categori={"Copywriting"}>
                       <p>Copywriting</p>
@@ -69,7 +165,7 @@ export const PopNewCard = () => {
                 </S.Checkbox>
               </S.CategoriesThemes>
             </S.PopNewCardCategories>
-            <S.FormNewСreateBtn id="btnCreate">
+            <S.FormNewСreateBtn onClick={handleNewCard}>
               Создать задачу
             </S.FormNewСreateBtn>
           </S.PopNewCardContent>
