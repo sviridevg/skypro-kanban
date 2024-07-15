@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import Calendar from "../Icons/calendar";
+// import Calendar from "../Icons/calendar";
 import * as S from "./card.styled";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 
 export const Card = ({ topic, title, date, id }) => {
+
   return (
     <S.CardsItem>
       <S.CardsCard>
@@ -25,7 +26,13 @@ export const Card = ({ topic, title, date, id }) => {
             <h3> {title} </h3>
           </a>
           <S.CardDate>
-            <Calendar />
+
+
+
+            {/* <Calendar /> */}
+
+
+
             <p>{format(date, "dd.MM.yy", { locale: ru })}</p>
           </S.CardDate>
         </S.CardContent>

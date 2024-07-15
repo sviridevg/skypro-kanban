@@ -4,15 +4,14 @@ const apiUrl = "https://wedev-api.sky.pro/api/kanban";
 export const addTask = async (carsdData) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  console.log(user.token);
-  console.log(carsdData);
+  const { title, topic, status, description, date } = carsdData;
 
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${user.token}`,
     },
-    body: JSON.stringify(carsdData),
+    body: JSON.stringify({ title, topic, status, description, date }),
   });
 
   if (!response.ok) {

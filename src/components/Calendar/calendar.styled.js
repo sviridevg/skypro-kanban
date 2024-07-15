@@ -143,7 +143,11 @@ export const CalendarP = styled.div`
 
 export const DateControl = styled(CalendarP)``;
 
-export const CalendarPDateEnd = styled(CalendarP)``;
+export const CalendarPDateEnd = styled(CalendarP)`
+  & span {
+    color: ${({ theme }) => theme.PopExitTtlH2};
+  }
+`;
 
 export const StyledDatePicker = styled(DayPicker)`
   margin: 0;

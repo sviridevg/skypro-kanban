@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import * as C from "../Calendar/calendar.styled";
 import "react-day-picker/dist/style.css";
@@ -9,18 +9,20 @@ import { routes } from "../../router/routes";
 import * as S from "./popNewCard.styled";
 import { useEffect, useState } from "react";
 import { addTask } from "../../api/newCard";
+import { useTasks } from "../../context/Tasks/useTasks";
 
 export const PopNewCard = () => {
+  const { setCards } = useTasks();
+  const [error, setError] = useState("");
+  const navigation = useNavigate();
   const [selected, setSelected] = useState();
   const [carsdData, setCardData] = useState({
     title: "",
     topic: "",
-    status: "",
+    status: "Без статуса",
     description: "",
     date: "",
   });
-
-  // console.log(carsdData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +44,20 @@ export const PopNewCard = () => {
 
   const handleNewCard = (e) => {
     e.preventDefault();
-    addTask(carsdData);
+
+    if (!carsdData.title || !carsdData.topic || !carsdData.description) {
+      setError("Для продолжения заполните все поля!");
+      return;
+    }
+
+    addTask(carsdData)
+      .then((res) => {
+        setCards(res.tasks);
+        navigation(routes.main);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -105,7 +120,7 @@ export const PopNewCard = () => {
                     )}
                     {selected && (
                       <C.CalendarPDateEnd>
-                        Срок исполнения:
+                        Срок исполнения: 
                         <span>
                           {format(selected, "dd.MM.yy", { locale: ru })}{" "}
                         </span>
@@ -165,9 +180,11 @@ export const PopNewCard = () => {
                 </S.Checkbox>
               </S.CategoriesThemes>
             </S.PopNewCardCategories>
+
             <S.FormNewСreateBtn onClick={handleNewCard}>
               Создать задачу
             </S.FormNewСreateBtn>
+            {error && <p>{error}</p>}
           </S.PopNewCardContent>
         </S.PopNewCardBlock>
       </S.PopNewCardContainer>

@@ -1,10 +1,23 @@
-import { Link, useParams } from "react-router-dom";
-import { Calendar } from "../Calendar";
+import { Link, useNavigate, useParams } from "react-router-dom";
+// import { Calendar } from "../Calendar";
 import { routes } from "../../router/routes";
-
+import { useTasks } from "../../context/Tasks/useTasks";
+import { deleteCardForID } from "../../api/tasks";
+// import { useState } from "react";
 
 export const PopBrowse = () => {
+  const navigation = useNavigate();
+  const { setCards } = useTasks();
+
   const params = useParams();
+
+  const handleDelCard = (e) => {
+    e.preventDefault();
+    deleteCardForID(params.id).then((res) => {
+      setCards(res.tasks);
+      navigation(routes.main);
+    });
+  };
 
   return (
     <div className="pop-browse" id="popBrowse">
@@ -12,7 +25,9 @@ export const PopBrowse = () => {
         <div className="pop-browse__block">
           <div className="pop-browse__content">
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Название задачи {params.id}</h3>
+              <h3 className="pop-browse__ttl">
+                {params.title} {params.id}
+              </h3>
               <div className="categories__theme theme-top _orange _active-category">
                 <p className="_orange">Web Design</p>
               </div>
@@ -20,19 +35,19 @@ export const PopBrowse = () => {
             <div className="pop-browse__status status">
               <p className="status__p subttl">Статус</p>
               <div className="status__themes">
-                <div className="status__theme _hide">
+                <div className="status__theme ">
                   <p>Без статуса</p>
                 </div>
                 <div className="status__theme _gray">
                   <p className="_gray">Нужно сделать</p>
                 </div>
-                <div className="status__theme _hide">
+                <div className="status__theme ">
                   <p>В работе</p>
                 </div>
-                <div className="status__theme _hide">
+                <div className="status__theme ">
                   <p>Тестирование</p>
                 </div>
-                <div className="status__theme _hide">
+                <div className="status__theme ">
                   <p>Готово</p>
                 </div>
               </div>
@@ -54,7 +69,7 @@ export const PopBrowse = () => {
                     placeholder="Введите описание задачи..."></textarea>
                 </div>
               </form>
-              <Calendar />
+              {/* <Calendar /> */}
             </div>
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>
@@ -68,11 +83,11 @@ export const PopBrowse = () => {
                   <a href="#">Редактировать задачу</a>
                 </button>
                 <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
+                  <a onClick={handleDelCard}>Удалить задачу</a>
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">
-              <Link to={routes.main}>Закрыть</Link>
+                <Link to={routes.main}>Закрыть</Link>
               </button>
             </div>
             <div className="pop-browse__btn-edit _hide">

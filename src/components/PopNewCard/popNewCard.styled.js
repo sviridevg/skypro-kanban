@@ -49,12 +49,12 @@ export const PopNewCardContainer = styled.div`
 export const PopNewCardBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.PopExitblockBgColor};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid ${({ theme }) => theme.PopExitblockBorderColor};
   position: relative;
 `;
 
@@ -63,7 +63,7 @@ export const PopNewCardContent = styled.div`
   text-align: left;
 
   & h3 {
-    color: #000;
+    color: ${({ theme }) => theme.PopExitTtlH2};
     font-size: 20px;
     font-weight: 600;
     line-height: 24px;
@@ -144,7 +144,7 @@ export const FormNewBlock = styled.div`
 `;
 
 export const FormNewLabel = styled.label`
-  color: #000;
+  color: ${({ theme }) => theme.PopExitTtlH2};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -174,7 +174,7 @@ export const FormNewInput = styled.input`
     font-weight: 400;
     font-size: 14px;
     line-height: 1px;
-    color: #94a6be;
+    color: #94A6BE;
     letter-spacing: -0.14px;
   }
 `;

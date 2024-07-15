@@ -87,7 +87,7 @@ export const Categories = css`
 `;
 
 export const Subttl = css`
-  color: #000;
+  color: ${({ theme }) => theme.PopExitTtlH2};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
