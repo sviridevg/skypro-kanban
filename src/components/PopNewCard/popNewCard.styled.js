@@ -174,7 +174,7 @@ export const FormNewInput = styled.input`
     font-weight: 400;
     font-size: 14px;
     line-height: 1px;
-    color: #94A6BE;
+    color: #94a6be;
     letter-spacing: -0.14px;
   }
 `;
