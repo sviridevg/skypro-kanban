@@ -10,6 +10,7 @@ import * as S from "./popNewCard.styled";
 import { useEffect, useState } from "react";
 import { addTask } from "../../api/newCard";
 import { useTasks } from "../../context/Tasks/useTasks";
+import { Error } from "../../globalStyle.stiled";
 
 export const PopNewCard = () => {
   const { setCards } = useTasks();
@@ -184,7 +185,7 @@ export const PopNewCard = () => {
             <S.FormNewСreateBtn onClick={handleNewCard}>
               Создать задачу
             </S.FormNewСreateBtn>
-            {error && <p>{error}</p>}
+            {error && <Error>{error}</Error>}
           </S.PopNewCardContent>
         </S.PopNewCardBlock>
       </S.PopNewCardContainer>

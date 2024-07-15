@@ -53,6 +53,11 @@ export const Container = styled.div`
   padding: 0 30px;
 `;
 
+export const Error = styled.p`
+margin-top: 16px;
+color: rgb(246, 92, 90);
+`;
+
 export const Hover01 = css`
   &:hover {
     background-color: #33399b;

@@ -3,6 +3,7 @@ import { routes } from "../../router/routes";
 import * as S from "./Register.styled";
 import { useState } from "react";
 import { getUsers, signUp } from "../../api/register";
+import { Error } from "../../globalStyle.stiled";
 
 export const RegisterPage = () => {
   const navigation = useNavigate();
@@ -79,7 +80,7 @@ export const RegisterPage = () => {
                 placeholder="Пароль"
               />
 
-              {error && <p>{error}</p>}
+              {error && <Error>{error}</Error>}
               <S.ModalBtnEnter onClick={handleSignUp} id="SignUpEnter">
                 Зарегистрироваться
               </S.ModalBtnEnter>

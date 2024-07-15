@@ -5,6 +5,7 @@ import { useState } from "react";
 import { signIn } from "../../api/user";
 
 import { useUser } from "../../context/User/useUser";
+import { Error } from "../../globalStyle.stiled";
 
 
 export const LoginPage = () => {
@@ -63,7 +64,7 @@ export const LoginPage = () => {
                 id="formpassword"
                 placeholder="Пароль"
               />
-              {error && <p>{error}</p>}
+              {error && <Error>{error}</Error>}
               <S.ModalBtnEnter
                 onClick={handleSubmit}
                 className="modal__btn-enter _hover01"
