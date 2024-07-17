@@ -4,10 +4,14 @@ import * as S from "./Login.styled";
 import { useState } from "react";
 import { signIn } from "../../api/user";
 
-// eslint-disable-next-line react/prop-types
-export const LoginPage = ({ setUser }) => {
+import { useUser } from "../../context/User/useUser";
+import { Error } from "../../globalStyle.stiled";
+
+
+export const LoginPage = () => {
   const navigation = useNavigate();
 
+  const { login } = useUser();
   const [formData, setFormData] = useState({ login: "", password: "" });
   const [error, setError] = useState("");
 
@@ -25,7 +29,7 @@ export const LoginPage = ({ setUser }) => {
 
     signIn(formData)
       .then((res) => {
-        setUser(res.user);
+        login(res.user);
         navigation(routes.main);
       })
       .catch((error) => {
@@ -60,7 +64,7 @@ export const LoginPage = ({ setUser }) => {
                 id="formpassword"
                 placeholder="Пароль"
               />
-              {error && <p>{error}</p>}
+              {error && <Error>{error}</Error>}
               <S.ModalBtnEnter
                 onClick={handleSubmit}
                 className="modal__btn-enter _hover01"

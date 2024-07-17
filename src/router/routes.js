@@ -5,4 +5,5 @@ export const routes = {
   exit: "/exit",
   notFound: "*",
   card: "/card/:id",
-}
+  newCard: "/new",
+};

@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 const signUpUrl = "https://wedev-api.sky.pro/api/user";
 const url = "https://wedev-api.sky.pro/api/user";
 

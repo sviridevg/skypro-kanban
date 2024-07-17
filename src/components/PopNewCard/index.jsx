@@ -1,152 +1,194 @@
-import NavNext from "../Icons/navNext";
-import NavPrev from "../Icons/navPrev";
+import { Link, useNavigate } from "react-router-dom";
+
+import * as C from "../Calendar/calendar.styled";
+import "react-day-picker/dist/style.css";
+import { format, formatISO } from "date-fns";
+import { ru } from "date-fns/locale";
+
+import { routes } from "../../router/routes";
+import * as S from "./popNewCard.styled";
+import { useEffect, useState } from "react";
+import { addTask } from "../../api/newCard";
+import { useTasks } from "../../context/Tasks/useTasks";
+import { Error } from "../../globalStyle.stiled";
 
 export const PopNewCard = () => {
+  const { setCards } = useTasks();
+  const [error, setError] = useState("");
+  const navigation = useNavigate();
+  const [selected, setSelected] = useState();
+  const [carsdData, setCardData] = useState({
+    title: "",
+    topic: "",
+    status: "Без статуса",
+    description: "",
+    date: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCardData({
+      title: "",
+      topic: "",
+      status: "",
+      description: "",
+      date: "",
+    });
+  };
+
+  useEffect(() => {
+    if (selected) {
+      let result = formatISO(selected, "dd.MM.yy", { locale: ru });
+      setCardData({ ...carsdData, date: `${result}` });
+    }
+  }, [selected]);
+
+  const handleNewCard = (e) => {
+    e.preventDefault();
+
+    if (!carsdData.title || !carsdData.topic || !carsdData.description) {
+      setError("Для продолжения заполните все поля!");
+      return;
+    }
+
+    addTask(carsdData)
+      .then((res) => {
+        setCards(res.tasks);
+        navigation(routes.main);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+
   return (
-    <div className="pop-new-card" id="popNewCard">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" className="pop-new-card__close">
-              &#10006;
-            </a>
-            <div className="pop-new-card__wrap">
-              <form
-                className="pop-new-card__form form-new"
-                id="formNewCard"
-                action="#">
-                <div className="form-new__block">
-                  <label htmlFor="formTitle" className="subttl">
+    <S.PopNewCard id="popNewCard">
+      <S.PopNewCardContainer>
+        <S.PopNewCardBlock onSubmit={handleSubmit}>
+          <S.PopNewCardContent>
+            <h3>Создание задачи</h3>
+            <Link to={routes.main}>
+              <S.PopNewCardClose>&#10006;</S.PopNewCardClose>
+            </Link>
+            <S.PopNewCardWrap>
+              <S.PopNewCardForm id="formNewCard" action="#">
+                <S.FormNewBlock>
+                  <S.FormNewLabel htmlFor="formTitle">
                     Название задачи
-                  </label>
+                  </S.FormNewLabel>
                   <input
-                    className="form-new__input"
                     type="text"
                     name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, title: e.target.value })
+                    }
                     autoFocus
                   />
-                </div>
-                <div className="form-new__block">
-                  <label htmlFor="textArea" className="subttl">
+                </S.FormNewBlock>
+                <S.FormNewBlock>
+                  <S.FormNewLabel htmlFor="textArea">
                     Описание задачи
-                  </label>
+                  </S.FormNewLabel>
                   <textarea
-                    className="form-new__area"
                     name="text"
                     id="textArea"
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, description: e.target.value })
+                    }
                     placeholder="Введите описание задачи..."></textarea>
-                </div>
-              </form>
-              <div className="pop-new-card__calendar calendar">
-                <p className="calendar__ttl subttl">Даты</p>
-                <div className="calendar__block">
-                  <div className="calendar__nav">
-                    <div className="calendar__month">Сентябрь 2023</div>
-                    <div className="nav__actions">
-                      <div className="nav__action" data-action="prev">
-                        <NavPrev />
-                      </div>
-                      <div className="nav__action" data-action="next">
-                        <NavNext />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="calendar__content">
-                    <div className="calendar__days-names">
-                      <div className="calendar__day-name">пн</div>
-                      <div className="calendar__day-name">вт</div>
-                      <div className="calendar__day-name">ср</div>
-                      <div className="calendar__day-name">чт</div>
-                      <div className="calendar__day-name">пт</div>
-                      <div className="calendar__day-name -weekend-">сб</div>
-                      <div className="calendar__day-name -weekend-">вс</div>
-                    </div>
-                    <div className="calendar__cells">
-                      <div className="calendar__cell _other-month">28</div>
-                      <div className="calendar__cell _other-month">29</div>
-                      <div className="calendar__cell _other-month">30</div>
-                      <div className="calendar__cell _cell-day">31</div>
-                      <div className="calendar__cell _cell-day">1</div>
-                      <div className="calendar__cell _cell-day _weekend">2</div>
-                      <div className="calendar__cell _cell-day _weekend">3</div>
-                      <div className="calendar__cell _cell-day">4</div>
-                      <div className="calendar__cell _cell-day">5</div>
-                      <div className="calendar__cell _cell-day ">6</div>
-                      <div className="calendar__cell _cell-day">7</div>
-                      <div className="calendar__cell _cell-day _current">8</div>
-                      <div className="calendar__cell _cell-day _weekend">9</div>
-                      <div className="calendar__cell _cell-day _weekend">
-                        10
-                      </div>
-                      <div className="calendar__cell _cell-day">11</div>
-                      <div className="calendar__cell _cell-day">12</div>
-                      <div className="calendar__cell _cell-day">13</div>
-                      <div className="calendar__cell _cell-day">14</div>
-                      <div className="calendar__cell _cell-day">15</div>
-                      <div className="calendar__cell _cell-day _weekend">
-                        16
-                      </div>
-                      <div className="calendar__cell _cell-day _weekend">
-                        17
-                      </div>
-                      <div className="calendar__cell _cell-day">18</div>
-                      <div className="calendar__cell _cell-day">19</div>
-                      <div className="calendar__cell _cell-day">20</div>
-                      <div className="calendar__cell _cell-day">21</div>
-                      <div className="calendar__cell _cell-day">22</div>
-                      <div className="calendar__cell _cell-day _weekend">
-                        23
-                      </div>
-                      <div className="calendar__cell _cell-day _weekend">
-                        24
-                      </div>
-                      <div className="calendar__cell _cell-day">25</div>
-                      <div className="calendar__cell _cell-day">26</div>
-                      <div className="calendar__cell _cell-day">27</div>
-                      <div className="calendar__cell _cell-day">28</div>
-                      <div className="calendar__cell _cell-day">29</div>
-                      <div className="calendar__cell _cell-day _weekend">
-                        30
-                      </div>
-                      <div className="calendar__cell _other-month _weekend">
-                        1
-                      </div>
-                    </div>
-                  </div>
+                </S.FormNewBlock>
+              </S.PopNewCardForm>
 
-                  <input type="hidden" id="datepick_value" value="08.09.2023" />
-                  <div className="calendar__period">
-                    <p className="calendar__p date-end">
-                      Выберите срок исполнения{" "}
-                      <span className="date-control"></span>.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="pop-new-card__categories categories">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
-              </div>
-            </div>
-            <button className="form-new__create _hover01" id="btnCreate">
+              <C.PopNewCardCalendar>
+                <C.CalendarTtl>Даты</C.CalendarTtl>
+                <C.CalendarBlock>
+                  <C.CalendarContent>
+                    <C.StyledDatePicker
+                      mode="single"
+                      selected={selected}
+                      onSelect={setSelected}
+                      locale={ru}
+                    />
+                  </C.CalendarContent>
+                  <C.CalendarPeriod>
+                    {!selected && (
+                      <C.CalendarPDateEnd>
+                        {" "}
+                        Выберите срок исполнения.{" "}
+                      </C.CalendarPDateEnd>
+                    )}
+                    {selected && (
+                      <C.CalendarPDateEnd>
+                        Срок исполнения: 
+                        <span>
+                          {format(selected, "dd.MM.yy", { locale: ru })}{" "}
+                        </span>
+                      </C.CalendarPDateEnd>
+                    )}
+                  </C.CalendarPeriod>
+                </C.CalendarBlock>
+              </C.PopNewCardCalendar>
+            </S.PopNewCardWrap>
+            <S.PopNewCardCategories>
+              <S.PopNewCardP>Категория</S.PopNewCardP>
+              <S.CategoriesThemes>
+                <S.Checkbox>
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="Web Design"
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, topic: e.target.id })
+                    }
+                  />
+                  <span>
+                    <S.Categori $categori={"Web Design"}>
+                      <p>Web Design</p>
+                    </S.Categori>
+                  </span>
+                </S.Checkbox>
+                <S.Checkbox>
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="Research"
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, topic: e.target.id })
+                    }
+                  />
+                  <span>
+                    <S.Categori $categori={"Research"}>
+                      <p>Research</p>
+                    </S.Categori>
+                  </span>
+                </S.Checkbox>
+                <S.Checkbox>
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="Copywriting"
+                    onChange={(e) =>
+                      setCardData({ ...carsdData, topic: e.target.id })
+                    }
+                  />
+                  <span>
+                    <S.Categori $categori={"Copywriting"}>
+                      <p>Copywriting</p>
+                    </S.Categori>
+                  </span>
+                </S.Checkbox>
+              </S.CategoriesThemes>
+            </S.PopNewCardCategories>
+
+            <S.FormNewСreateBtn onClick={handleNewCard}>
               Создать задачу
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </S.FormNewСreateBtn>
+            {error && <Error>{error}</Error>}
+          </S.PopNewCardContent>
+        </S.PopNewCardBlock>
+      </S.PopNewCardContainer>
+    </S.PopNewCard>
   );
 };

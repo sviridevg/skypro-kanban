@@ -1,4 +1,6 @@
+import { DayPicker } from "react-day-picker";
 import styled, { css } from "styled-components";
+import { Subttl } from "../../globalStyle.stiled";
 
 export const Calendar = css`
   width: 182px;
@@ -15,12 +17,7 @@ export const CalendarTtl = styled.div`
   margin-bottom: 14px;
   padding: 0 7px;
 
-  & .subttl {
-    color: #000;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1;
-  }
+  ${Subttl}
 `;
 
 export const CalendarBlock = styled.div`
@@ -146,4 +143,33 @@ export const CalendarP = styled.div`
 
 export const DateControl = styled(CalendarP)``;
 
-export const CalendarPDateEnd = styled(CalendarP)``;
+export const CalendarPDateEnd = styled(CalendarP)`
+  & span {
+    color: ${({ theme }) => theme.PopExitTtlH2};
+  }
+`;
+
+export const StyledDatePicker = styled(DayPicker)`
+  margin: 0;
+  --rdp-cell-size: 24px;
+  --rdp-caption-font-size: 14px;
+  --rdp-accent-color: #94a6be;
+  & div {
+    color: #94a6be;
+    text-transform: capitalize;
+  }
+
+  & td {
+    font-size: 10px;
+    color: #94a6be;
+  }
+
+  & th {
+    color: #94a6be;
+    font-size: 10px;
+  }
+
+  & svg {
+    color: #94a6be;
+  }
+`;

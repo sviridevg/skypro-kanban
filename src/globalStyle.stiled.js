@@ -53,6 +53,11 @@ export const Container = styled.div`
   padding: 0 30px;
 `;
 
+export const Error = styled.p`
+margin-top: 16px;
+color: rgb(246, 92, 90);
+`;
+
 export const Hover01 = css`
   &:hover {
     background-color: #33399b;
@@ -80,6 +85,17 @@ export const Hover03 = css`
   &:hover a {
     color: #ffffff;
   }
+`;
+
+export const Categories = css`
+  margin-bottom: 20px;
+`;
+
+export const Subttl = css`
+  color: ${({ theme }) => theme.PopExitTtlH2};
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
 `;
 
 export const Orange = css`
