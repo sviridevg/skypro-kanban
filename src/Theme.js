@@ -40,8 +40,8 @@ export const light = {
   purpleBg: "#E9D4FF",
   purpleColor: "#9A48F1",
 
-  greyBg: "#94A6BE",
-  greyColor: "#FFFFFF",
+  grayBg: "#94A6BE",
+  grayColor: "#FFFFFF",
 };
 
 export const dark = {
@@ -87,6 +87,6 @@ export const dark = {
   purpleColor: "#E9D4FF",
   purpleBg: "#9A48F1",
 
-  greyColor: "#94A6BE",
-  greyBg: "#FFFFFF",
+  grayColor: "#151419",
+  grayBg: "#94A6BE",
 };

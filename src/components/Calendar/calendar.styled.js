@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { Subttl } from "../../globalStyle.stiled";
 
 export const Calendar = css`
-  width: 182px;
+  width: 180px;
   margin-bottom: 20px;
 `;
 
@@ -151,6 +151,7 @@ export const CalendarPDateEnd = styled(CalendarP)`
 
 export const StyledDatePicker = styled(DayPicker)`
   margin: 0;
+  width: 182px;
   --rdp-cell-size: 24px;
   --rdp-caption-font-size: 14px;
   --rdp-accent-color: #94a6be;
@@ -167,6 +168,10 @@ export const StyledDatePicker = styled(DayPicker)`
   & th {
     color: #94a6be;
     font-size: 10px;
+  }
+
+  & tbody {
+    width: 182px;
   }
 
   & svg {

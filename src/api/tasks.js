@@ -21,20 +21,23 @@ export const fetchTasks = async (token) => {
   return data;
 };
 
-// export const getCardForID = async (token) => {
-//   const response = await fetch(apiUrl, {
-//     method: "GET",
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
+export const getCardForID = async (id) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const response = await fetch(`${apiUrl}/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  });
 
-//   if (!response.ok) {
-//     throw new Error(
-//       `Не удалось получить данные с сервера! status: ${response.status}`
-//     );
-//   }
-// };
+  if (!response.ok) {
+    throw new Error(
+      `Не удалось получить данные с сервера! status: ${response.status}`
+    );
+  }
+
+  return await response.json();
+};
 
 export const deleteCardForID = async (id) => {
   const user = JSON.parse(localStorage.getItem("user"));

@@ -130,7 +130,9 @@ export const PopNewCard = () => {
                   </C.CalendarPeriod>
                 </C.CalendarBlock>
               </C.PopNewCardCalendar>
+              
             </S.PopNewCardWrap>
+            
             <S.PopNewCardCategories>
               <S.PopNewCardP>Категория</S.PopNewCardP>
               <S.CategoriesThemes>

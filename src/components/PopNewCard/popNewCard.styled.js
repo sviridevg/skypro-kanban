@@ -112,6 +112,7 @@ export const FormNewBlock = styled.div`
 
   & input,
   textarea {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
     width: 100%;
     outline: none;
     padding: 14px;

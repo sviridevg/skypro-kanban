@@ -42,7 +42,6 @@ export const Header = ({ theme, setTheme }) => {
             {isOpen && (
               <S.PopUserSet>
                 <S.HeaderPopUserSet id="user-set-target">
-                  {/* <a href="">x</a>  */}
                   <S.PopUserSetName>{user.name}</S.PopUserSetName>
                   <S.PopUserSetMail>{user.login}</S.PopUserSetMail>
                   <S.PopUserSetThem>
