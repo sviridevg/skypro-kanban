@@ -259,5 +259,11 @@ export const Categori = styled.div`
     font-size: 14px;
     font-weight: 600;
     line-height: 14px;
+
+    @media (max-width: 375px) {
+      font-size: 12px;
+  }
+
+
   }
 `;

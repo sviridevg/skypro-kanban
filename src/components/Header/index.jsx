@@ -13,8 +13,11 @@ export const Header = ({ theme, setTheme }) => {
     setIsOpen(!isOpen);
   };
 
+  // Переключение темы с сохранением в localStorage
   const onTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
