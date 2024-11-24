@@ -28,7 +28,7 @@ export const Modal = styled.div`
   justify-content: center;
 
   @media (max-width: 375px) {
-    background-color: #FFFFFF;
+    background-color: ${({ theme }) => theme.Modal};
   }
 `;
 
