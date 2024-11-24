@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Main = styled.main`
   width: 100%;
-  min-height: 100vh;
-  background-color: ${({ theme }) => theme.body};
+  min-height: 100%;
+
 `;
 
 export const MainBlock = styled.div`
@@ -11,9 +11,19 @@ export const MainBlock = styled.div`
   min-height: 100%;
   margin: 0 auto;
   padding: 25px 0 49px;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 0 64px;
+  }
 `;
 
 export const MainContent = styled.div`
   width: 100%;
   display: flex;
+
+  @media (max-width: 1200px) {
+    display: block;
+  }
 `;

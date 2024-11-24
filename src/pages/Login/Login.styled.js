@@ -26,6 +26,10 @@ export const Modal = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 375px) {
+    background-color: #FFFFFF;
+  }
 `;
 
 export const ModalBlok = styled.div`
@@ -38,6 +42,15 @@ export const ModalBlok = styled.div`
   border-radius: 10px;
   border: 0.7px solid ${({ theme }) => theme.ModalBorder};
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
+
+  @media (max-width: 375px) {
+    max-width: 368px;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: none;
+    border: none;
+    box-shadow: none;
+  }
 `;
 
 export const ModalTtl = styled.div`
@@ -109,6 +122,10 @@ export const ModalBtnEnter = styled.button`
   font-weight: 500;
   letter-spacing: -0.14px;
   color: #ffffff;
+
+  @media (max-width: 375px) {
+    height: 40px;
+  }
 
   & a {
     width: 100%;

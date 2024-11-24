@@ -5,6 +5,11 @@ import { Subttl } from "../../globalStyle.stiled";
 export const Calendar = css`
   width: 180px;
   margin-bottom: 20px;
+
+  @media (max-width: 660px) {
+    max-width: 340px;
+    width: 100%;
+  }
 `;
 
 export const PopNewCardCalendar = styled.div`
@@ -16,6 +21,10 @@ export const PopNewCardCalendar = styled.div`
 export const CalendarTtl = styled.div`
   margin-bottom: 14px;
   padding: 0 7px;
+
+  @media (max-width: 660px) {
+    padding: 0;
+  }
 
   ${Subttl}
 `;

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import * as S from "./card.styled";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
-import { IconCalendar } from "../Icons/calendar"
+import { IconCalendar } from "../Icons/calendar";
 
 export const Card = ({ topic, title, date, id }) => {
   return (
@@ -12,11 +12,14 @@ export const Card = ({ topic, title, date, id }) => {
           <S.CardTheme $topicColor={topic}>
             <p>{topic}</p>
           </S.CardTheme>
+
+          <Link to={`/card/${id}`} target="_self">
             <S.CardsBtn>
               <div></div>
               <div></div>
               <div></div>
             </S.CardsBtn>
+          </Link>
         </S.CardsGroup>
         <S.CardContent>
           <Link to={`/card/${id}`} target="_self">

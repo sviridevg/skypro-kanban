@@ -29,6 +29,7 @@ export const light = {
   // Карточка
   cardsBg: "#FFFFFF",
   cardsContentColor: "#000000",
+  cardsTextColor: "#94A6BE",
 
   // Статусы карточек
   orangeBg: "#ffe4c2",
@@ -76,6 +77,7 @@ export const dark = {
   // Карточка
   cardsBg: "#20202C",
   cardsContentColor: "#FFF",
+  cardsTextColor: "#94A6BE",
 
   // Статусы карточек
   orangeColor: "#ffe4c2",

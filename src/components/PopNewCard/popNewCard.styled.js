@@ -17,6 +17,10 @@ export const PopNewCard = styled.div`
   top: 0;
   left: 0;
   z-index: 6;
+
+  @media (max-width: 660px) {
+    top: 70px;
+  }
 `;
 export const PopNewCardCategories = styled.div`
   & p {
@@ -44,6 +48,16 @@ export const PopNewCardContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 660px) {
+    padding: 0;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 495px) {
+    padding: 0;
+    justify-content: flex-start;
+  }
 `;
 
 export const PopNewCardBlock = styled.div`
@@ -56,6 +70,14 @@ export const PopNewCardBlock = styled.div`
   border-radius: 10px;
   border: 0.7px solid ${({ theme }) => theme.PopExitblockBorderColor};
   position: relative;
+
+  @media (max-width: 660px) {
+    border-radius: 0;
+  }
+
+  @media (max-width: 495px) {
+    padding: 20px 16px 32px;
+  }
 `;
 
 export const PopNewCardContent = styled.div`
@@ -88,12 +110,22 @@ export const PopNewCardWrap = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  @media (max-width: 660px) {
+    display: block;
+  }
 `;
 
 export const PopNewCardForm = styled.form`
   max-width: 370px;
   width: 100%;
   display: block;
+
+  @media (max-width: 495px) {
+    max-width: 100%;
+    width: 100%;
+    display: block;
+  }
 `;
 
 export const FormNewBlock = styled.div`
@@ -123,24 +155,24 @@ export const FormNewBlock = styled.div`
     line-height: 1;
     letter-spacing: -0.14px;
     margin: 20px 0;
+    color: ${({ theme }) => theme.cardsTextColor};
+  }
 
-    & input::-moz-placeholder,
-    textarea::-moz-placeholder {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1px;
-      color: #94a6be;
-      letter-spacing: -0.14px;
-    }
+  & ::-moz-placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1px;
+    color: ${({ theme }) => theme.cardsTextColor};
+    letter-spacing: -0.14px;
+  }
 
-    & input::placeholder,
-    textarea::placeholder {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1px;
-      color: #94a6be;
-      letter-spacing: -0.14px;
-    }
+  & ::placeholder {
+    padding-top: 7px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1px;
+    color: ${({ theme }) => theme.cardsTextColor};
+    letter-spacing: -0.14px;
   }
 `;
 

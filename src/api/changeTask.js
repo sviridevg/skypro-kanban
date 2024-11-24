@@ -5,7 +5,6 @@ export const changeTask = async (carsdData, id) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const { title, topic, status, description, date } = carsdData;
-  console.log(status);
 
   const response = await fetch(`${apiUrl}/${id}`, {
     method: "PUT",

@@ -22,6 +22,10 @@ export const PopBrowse = styled.div`
   top: 0;
   left: 0;
   z-index: 7;
+
+  @media (max-width: 660px) {
+    top: 70px;
+  }
 `;
 
 export const PopBrowseContainer = styled.div`
@@ -34,6 +38,11 @@ export const PopBrowseContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 660px) {
+    padding: 0;
+    justify-content: flex-start;
+  }
 `;
 
 export const PopBrowseBlock = styled.div`
@@ -46,6 +55,16 @@ export const PopBrowseBlock = styled.div`
   border-radius: 10px;
   border: 0.7px solid ${({ theme }) => theme.PopExitblockBorderColor};
   position: relative;
+
+  @media (max-width: 660px) {
+    border-radius: 0;
+    height: 100%;
+  }
+
+  @media (max-width: 495px) {
+    padding: 20px 16px 32px;
+    height: 100%;
+  }
 `;
 export const PopBrowseBlockMessage = styled.p`
   font-family: "Roboto", Arial, Helvetica, sans-serif;
@@ -93,6 +112,10 @@ export const PopBrowseWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media (max-width: 660px) {
+    display: block;
+  }
 `;
 
 export const FormBrowse = styled.div``;
@@ -102,6 +125,10 @@ export const PopBrowseForm = styled.form`
   width: 100%;
   display: block;
   margin-bottom: 20px;
+
+  @media (max-width: 495px) {
+    max-width: 100%;
+  }
 
   ${FormBrowse}
 `;
@@ -182,14 +209,30 @@ export const PopBrowseBtnBrowse = styled.div`
     margin-bottom: 10px;
     padding: 0 14px;
     margin-right: 8px;
+
+    @media (max-width: 495px) {
+      width: 100%;
+      height: 40px;
+      margin-right: 0px;
+    }
   }
 `;
 
 export const PopBrowseBtnEdit = styled(PopBrowseBtnBrowse)``;
 
 export const BtnGroup = styled.div`
+  @media (max-width: 495px) {
+    width: 100%;
+    margin-right: 0px;
+  }
+
   & button {
     margin-bottom: 10px;
+  }
+
+  @media (max-width: 495px) {
+    width: 100%;
+    margin-right: 0px;
   }
 `;
 
@@ -255,12 +298,18 @@ export const FormBrowseArea = styled.textarea`
   letter-spacing: -0.14px;
   margin-top: 14px;
   height: 200px;
+  color: ${({ theme }) => theme.cardsTextColor};
+
+  @media (max-width: 495px) {
+    max-width: 100%;
+    height: auto;
+  }
 
   & ::-moz-placeholder {
     font-weight: 400;
     font-size: 14px;
     line-height: 1px;
-    color: #94a6be;
+    color: ${({ theme }) => theme.cardsTextColor};
     letter-spacing: -0.14px;
   }
 
@@ -268,7 +317,7 @@ export const FormBrowseArea = styled.textarea`
     font-weight: 400;
     font-size: 14px;
     line-height: 1px;
-    color: #94a6be;
+    color: ${({ theme }) => theme.cardsTextColor};
     letter-spacing: -0.14px;
   }
 `;
@@ -287,7 +336,8 @@ export const StatusThemes = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
+  column-gap: 12px;
 `;
 
 export const SuccessMessage = styled.p`
