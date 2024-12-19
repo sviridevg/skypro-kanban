@@ -1,116 +1,242 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-// import { Calendar } from "../Calendar";
 import { routes } from "../../router/routes";
 import { useTasks } from "../../context/Tasks/useTasks";
-import { deleteCardForID } from "../../api/tasks";
-// import { useState } from "react";
+import { deleteCardForID, getCardForID } from "../../api/tasks";
+import * as S from "../PopBrowse/PopBrowse.styled";
+import * as C from "../Calendar/calendar.styled";
+import { useEffect, useState } from "react";
+import { format, formatISO } from "date-fns";
+import { ru } from "date-fns/locale";
+import { statusChecks } from "../../../data";
+import { changeTask } from "../../api/changeTask";
 
 export const PopBrowse = () => {
+  const [selected, setSelected] = useState();
+  const [selectedCard, setSelectedCard] = useState();
+  const [originalCard, setOriginalCard] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [hide, setHide] = useState(true);
+  const [successMessage, setSuccessMessage] = useState("");
   const navigation = useNavigate();
   const { setCards } = useTasks();
-
   const params = useParams();
 
-  const handleDelCard = (e) => {
+  // Получение карточки по ID
+  useEffect(() => {
+    if (params.id) {
+      getCardForID(params.id)
+        .then((data) => {
+          if (data?.task) {
+            setSelectedCard(data.task);
+            setOriginalCard(data.task);
+          }
+        })
+        .catch((error) => {
+          console.error("Ошибка при загрузке данных карточки:", error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [params.id]);
+
+  // Синхронизация selectedCard с cards
+  useEffect(() => {
+    if (selectedCard) {
+      setCards((prevCards) =>
+        prevCards.map((card) =>
+          card._id === selectedCard._id ? { ...card, ...selectedCard } : card
+        )
+      );
+    }
+  }, [selectedCard, setCards]);
+
+  // Удаление карточки
+  const handleDelCard = async (e) => {
     e.preventDefault();
-    deleteCardForID(params.id).then((res) => {
+    try {
+      const res = await deleteCardForID(params.id);
       setCards(res.tasks);
       navigation(routes.main);
-    });
+    } catch (error) {
+      console.error("Ошибка удаления карточки:", error);
+    }
   };
 
+  // Отмена изменений
+  const handleCancelChanges = (e) => {
+    e.preventDefault();
+    setSelectedCard(originalCard);
+    setHide(true);
+  };
+
+  // Обработчик сохранения карточки
+  const handleSaveChanges = () => {
+    changeTask(selectedCard, selectedCard._id);
+    setHide(true);
+    setSuccessMessage("Изменения сохранены");
+
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 2000);
+  };
+
+  // Обработчик изменения даты карточки
+  useEffect(() => {
+    if (selected) {
+      let result = formatISO(selected, "dd.MM.yy", { locale: ru });
+      setSelectedCard({ ...selectedCard, date: `${result}` });
+    }
+  }, [selected]);
+
   return (
-    <div className="pop-browse" id="popBrowse">
-      <div className="pop-browse__container">
-        <div className="pop-browse__block">
-          <div className="pop-browse__content">
-            <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">
-                {params.title} {params.id}
-              </h3>
-              <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-            </div>
-            <div className="pop-browse__status status">
-              <p className="status__p subttl">Статус</p>
-              <div className="status__themes">
-                <div className="status__theme ">
-                  <p>Без статуса</p>
-                </div>
-                <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
-                </div>
-                <div className="status__theme ">
-                  <p>В работе</p>
-                </div>
-                <div className="status__theme ">
-                  <p>Тестирование</p>
-                </div>
-                <div className="status__theme ">
-                  <p>Готово</p>
-                </div>
-              </div>
-            </div>
-            <div className="pop-browse__wrap">
-              <form
-                className="pop-browse__form form-browse"
-                id="formBrowseCard"
-                action="#">
-                <div className="form-browse__block">
-                  <label htmlFor="textArea01" className="subttl">
-                    Описание задачи
-                  </label>
-                  <textarea
-                    className="form-browse__area"
-                    name="text"
-                    id="textArea01"
-                    readOnly
-                    placeholder="Введите описание задачи..."></textarea>
-                </div>
-              </form>
-              {/* <Calendar /> */}
-            </div>
-            <div className="theme-down__categories theme-down">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-            </div>
-            <div className="pop-browse__btn-browse ">
-              <div className="btn-group">
-                <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
-                </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
-                  <a onClick={handleDelCard}>Удалить задачу</a>
-                </button>
-              </div>
-              <button className="btn-browse__close _btn-bg _hover01">
-                <Link to={routes.main}>Закрыть</Link>
-              </button>
-            </div>
-            <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
-                </button>
-                <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
-                </button>
-                <button
-                  className="btn-edit__delete _btn-bor _hover03"
-                  id="btnDelete">
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button className="btn-edit__close _btn-bg _hover01">
-                <Link to={routes.main}>Закрыть</Link>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <S.PopBrowse id="popBrowse">
+      <S.PopBrowseContainer>
+        <S.PopBrowseBlock>
+          {isLoading ? (
+            <S.PopBrowseBlockMessage>
+              Загрузка данных...
+            </S.PopBrowseBlockMessage>
+          ) : (
+            <S.PopBrowseContent>
+              <S.PopBrowseTopBlock>
+                <S.PopBrowseTtl>
+                  {selectedCard ? selectedCard.title : "Задача"}{" "}
+                </S.PopBrowseTtl>
+                {successMessage && (
+                  <S.SuccessMessage>{successMessage}</S.SuccessMessage>
+                )}
+                <S.Categori
+                  $categori={selectedCard ? selectedCard.topic : "Тема"}>
+                  <p>{selectedCard ? selectedCard.topic : "Тема"}</p>
+                </S.Categori>
+              </S.PopBrowseTopBlock>
+
+              <S.PopBrowseStatus>
+                <S.StatusP>Статус</S.StatusP>
+                <S.StatusThemes>
+                  <S.CheckboxCat style={{ display: hide ? "block" : "none" }}>
+                    <input type="radio" checked readOnly />
+                    <span>
+                      <S.StatusTheme>
+                        <p>{selectedCard ? selectedCard.status : "Статус"}</p>
+                      </S.StatusTheme>
+                    </span>
+                  </S.CheckboxCat>
+                  {statusChecks.map((stat, i) => (
+                    <S.CheckboxCat
+                      key={i}
+                      style={{ display: hide ? "none" : "block" }}>
+                      <input
+                        type="radio"
+                        name="status"
+                        id={stat}
+                        checked={stat === selectedCard?.status}
+                        onChange={(e) => {
+                          if (!hide) {
+                            setSelectedCard((prev) => ({
+                              ...prev,
+                              status: e.target.id,
+                            }));
+                          }
+                        }}
+                      />
+                      <span>
+                        <S.StatusTheme>
+                          <p>{stat}</p>
+                        </S.StatusTheme>
+                      </span>
+                    </S.CheckboxCat>
+                  ))}
+                </S.StatusThemes>
+              </S.PopBrowseStatus>
+
+              <S.PopBrowseWrap>
+                <S.PopBrowseForm>
+                  <S.FormBrowseBlock>
+                    <label htmlFor="textArea01">Описание задачи</label>
+                    <S.FormBrowseArea
+                      name="text"
+                      id="textArea01"
+                      readOnly={hide}
+                      value={selectedCard?.description || ""}
+                      placeholder="Введите описание задачи..."
+                      onChange={(e) => {
+                        if (!hide) {
+                          setSelectedCard((prev) => ({
+                            ...prev,
+                            description: e.target.value,
+                          }));
+                        }
+                      }}
+                    />
+                  </S.FormBrowseBlock>
+                </S.PopBrowseForm>
+
+                <C.PopNewCardCalendar>
+                  <C.CalendarTtl>Даты</C.CalendarTtl>
+                  <C.CalendarBlock>
+                    <C.StyledDatePicker
+                      mode="single"
+                      selected={new Date(selectedCard.date)}
+                      onSelect={hide === false && setSelected}
+                      locale={ru}
+                    />
+                    <C.CalendarPeriod>
+                      <C.CalendarPDateEnd>
+                        Срок исполнения:
+                        <span>
+                          {format(
+                            selected || new Date(selectedCard.date),
+                            "dd.MM.yy",
+                            { locale: ru }
+                          )}
+                        </span>
+                      </C.CalendarPDateEnd>
+                    </C.CalendarPeriod>
+                  </C.CalendarBlock>
+                </C.PopNewCardCalendar>
+              </S.PopBrowseWrap>
+
+              <S.PopBrowseBtnBrowse>
+                <S.BtnGroup>
+                  <S.BtnBrowseEdit
+                    style={{ display: hide ? "" : "none" }}
+                    onClick={() => setHide(false)}>
+                    Редактировать задачу
+                  </S.BtnBrowseEdit>
+                  <S.BtnBrowseDelete
+                    onClick={handleDelCard}
+                    style={{ display: hide ? "" : "none" }}>
+                    Удалить задачу
+                  </S.BtnBrowseDelete>
+                </S.BtnGroup>
+                <S.BtnBrowseClose style={{ display: hide ? "" : "none" }}>
+                  <Link to={routes.main}>Закрыть</Link>
+                </S.BtnBrowseClose>
+              </S.PopBrowseBtnBrowse>
+
+              <S.PopBrowseBtnEdit>
+                <S.BtnGroup>
+                  <S.BtnEditEdit
+                    onClick={handleSaveChanges}
+                    style={{ display: hide ? "none" : "" }}>
+                    Сохранить
+                  </S.BtnEditEdit>
+                  <S.BtnEditEditbor
+                    onClick={handleCancelChanges}
+                    style={{ display: hide ? "none" : "" }}>
+                    Отменить
+                  </S.BtnEditEditbor>
+                </S.BtnGroup>
+                <S.BtnEditClose style={{ display: hide ? "none" : "" }}>
+                  <Link to={routes.main}>Закрыть</Link>
+                </S.BtnEditClose>
+              </S.PopBrowseBtnEdit>
+            </S.PopBrowseContent>
+          )}
+        </S.PopBrowseBlock>
+      </S.PopBrowseContainer>
+    </S.PopBrowse>
   );
 };

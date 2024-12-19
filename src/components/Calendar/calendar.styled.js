@@ -3,8 +3,13 @@ import styled, { css } from "styled-components";
 import { Subttl } from "../../globalStyle.stiled";
 
 export const Calendar = css`
-  width: 182px;
+  width: 180px;
   margin-bottom: 20px;
+
+  @media (max-width: 660px) {
+    max-width: 340px;
+    width: 100%;
+  }
 `;
 
 export const PopNewCardCalendar = styled.div`
@@ -16,6 +21,10 @@ export const PopNewCardCalendar = styled.div`
 export const CalendarTtl = styled.div`
   margin-bottom: 14px;
   padding: 0 7px;
+
+  @media (max-width: 660px) {
+    padding: 0;
+  }
 
   ${Subttl}
 `;
@@ -151,6 +160,7 @@ export const CalendarPDateEnd = styled(CalendarP)`
 
 export const StyledDatePicker = styled(DayPicker)`
   margin: 0;
+  width: 182px;
   --rdp-cell-size: 24px;
   --rdp-caption-font-size: 14px;
   --rdp-accent-color: #94a6be;
@@ -167,6 +177,10 @@ export const StyledDatePicker = styled(DayPicker)`
   & th {
     color: #94a6be;
     font-size: 10px;
+  }
+
+  & tbody {
+    width: 182px;
   }
 
   & svg {

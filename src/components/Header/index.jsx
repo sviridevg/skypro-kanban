@@ -13,8 +13,11 @@ export const Header = ({ theme, setTheme }) => {
     setIsOpen(!isOpen);
   };
 
+  // Переключение темы с сохранением в localStorage
   const onTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
@@ -42,7 +45,6 @@ export const Header = ({ theme, setTheme }) => {
             {isOpen && (
               <S.PopUserSet>
                 <S.HeaderPopUserSet id="user-set-target">
-                  {/* <a href="">x</a>  */}
                   <S.PopUserSetName>{user.name}</S.PopUserSetName>
                   <S.PopUserSetMail>{user.login}</S.PopUserSetMail>
                   <S.PopUserSetThem>

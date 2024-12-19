@@ -29,6 +29,7 @@ export const light = {
   // Карточка
   cardsBg: "#FFFFFF",
   cardsContentColor: "#000000",
+  cardsTextColor: "#94A6BE",
 
   // Статусы карточек
   orangeBg: "#ffe4c2",
@@ -40,8 +41,8 @@ export const light = {
   purpleBg: "#E9D4FF",
   purpleColor: "#9A48F1",
 
-  greyBg: "#94A6BE",
-  greyColor: "#FFFFFF",
+  grayBg: "#94A6BE",
+  grayColor: "#FFFFFF",
 };
 
 export const dark = {
@@ -76,6 +77,7 @@ export const dark = {
   // Карточка
   cardsBg: "#20202C",
   cardsContentColor: "#FFF",
+  cardsTextColor: "#94A6BE",
 
   // Статусы карточек
   orangeColor: "#ffe4c2",
@@ -87,6 +89,6 @@ export const dark = {
   purpleColor: "#E9D4FF",
   purpleBg: "#9A48F1",
 
-  greyColor: "#94A6BE",
-  greyBg: "#FFFFFF",
+  grayColor: "#151419",
+  grayBg: "#94A6BE",
 };

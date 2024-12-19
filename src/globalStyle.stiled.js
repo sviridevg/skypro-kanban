@@ -22,6 +22,7 @@ button,
 ._btn {
   cursor: pointer;
   outline: none;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 ul li {
@@ -43,7 +44,7 @@ export const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: ${({ theme }) => theme.body};
 `;
 
 export const Container = styled.div`
@@ -51,11 +52,16 @@ export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 0 30px;
+
+  @media (max-width: 495px) {
+    width: 100%;
+    padding: 0 16px;
+  }
 `;
 
 export const Error = styled.p`
-margin-top: 16px;
-color: rgb(246, 92, 90);
+  margin-top: 16px;
+  color: rgb(246, 92, 90);
 `;
 
 export const Hover01 = css`
@@ -87,8 +93,40 @@ export const Hover03 = css`
   }
 `;
 
+export const BtnBor = css`
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  background: transparent;
+  color: #565eef;
+
+  & a {
+    color: #565eef;
+  }
+`;
+
+export const BtnBg = css`
+  border-radius: 4px;
+  background: #565eef;
+  border: none;
+  outline: none;
+  color: #ffffff;
+
+  & a {
+    color: #ffffff;
+  }
+`;
+
 export const Categories = css`
   margin-bottom: 20px;
+`;
+
+export const Status = css`
+  margin-bottom: 11px;
+`;
+
+export const Hide = css`
+  display: none;
 `;
 
 export const Subttl = css`
@@ -115,5 +153,5 @@ export const Purple = css`
 
 export const Gray = css`
   background-color: ${({ theme }) => theme.grayBg};
-  color: ${({ theme }) => theme.grauColor};
+  color: ${({ theme }) => theme.grayColor};
 `;
